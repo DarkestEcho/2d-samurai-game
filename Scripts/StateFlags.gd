@@ -13,6 +13,7 @@ enum Flags
 };
 
 const IN_AIR = Flags.Jumping | Flags.Falling;
+const IN_ACTION = Flags.Running | Flags.Jumping | Flags.Falling | Flags.Attacking;
 
 const FlagsPriority: Dictionary = {
 	Flags.Idle: 0,
