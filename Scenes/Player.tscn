@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://crmvduedao3jk" path="res://Assets/Sprites/Samurai_001/IDLE.png" id="3_nn08x"]
 [ext_resource type="Texture2D" uid="uid://ds8iccproxfcc" path="res://Assets/Sprites/Samurai_001/RUN.png" id="4_52ee3"]
 [ext_resource type="Script" uid="uid://d0fyths66yixj" path="res://Scripts/FlagStateManager.gd" id="6_nn08x"]
+[ext_resource type="AudioStream" uid="uid://wijpk6ttmh3y" path="res://Assets/Sounds/Characters/Player/Jump_001.wav" id="7_52ee3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bhhdu"]
 atlas = ExtResource("1_dewec")
@@ -345,3 +346,9 @@ shape = SubResource("RectangleShape2D_kln2b")
 [node name="FlagStateManager" type="Node" parent="." unique_id=971519293]
 script = ExtResource("6_nn08x")
 metadata/_custom_type_script = "uid://d0fyths66yixj"
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1523092229]
+stream = ExtResource("7_52ee3")
+volume_db = 1.0
+
+[node name="AudioPlayer2" type="AudioStreamPlayer2D" parent="." unique_id=1540816266]

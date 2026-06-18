@@ -5,7 +5,9 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_idj7w"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kln2b"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rgh2o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idj7w"]
 size = Vector2(128.23349, 128)
@@ -33,7 +35,9 @@ scale = Vector2(3, 29.901636)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=2097180509]
-shape = SubResource("RectangleShape2D_kln2b")
+position = Vector2(14.666667, 0.8026314)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_kln2b")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=2113094962]
 position = Vector2(1177, 262)
@@ -41,7 +45,9 @@ scale = Vector2(3, 29.901636)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=451667633]
-shape = SubResource("RectangleShape2D_kln2b")
+position = Vector2(-10.333334, 2.7533531e-14)
+rotation = -1.5707964
+shape = SubResource("WorldBoundaryShape2D_rgh2o")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=1683300370]
 position = Vector2(545.00006, 383)

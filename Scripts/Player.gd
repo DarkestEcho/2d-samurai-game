@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var flagState: FlagStateManager = $FlagStateManager
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var audio_player: AudioStreamPlayer2D = $AudioPlayer
+@onready var audio_player_2: AudioStreamPlayer2D = $AudioPlayer2
 
 const Flags = StateFlags.Flags;
 const FlagsPriority = StateFlags.FlagsPriority;
@@ -14,6 +16,8 @@ const COYOTE_TIME = 0.12 # in seconds
 const JUMP_BUFFER_TIME = 0.1 # in seconds
 const ATTACK_MOVE_TIME = 0.3 # in seconds
 const ATTACK_MOVE_TIME_AIR = 0.45 # in seconds
+
+const COLLISION_OFFSET_ATTACKING = 10;
 
 var coyote_timer: float = 0.0;
 var jump_buffer_timer: float = 0.0;
@@ -60,6 +64,11 @@ func _handle_jump() -> void:
 		coyote_timer = 0.0;
 		jump_buffer_timer = 0.0;
 		current_animation = "";
+		
+		audio_player.pitch_scale = randf_range( 0.8, 1.1 );
+		audio_player.stream = preload("uid://wijpk6ttmh3y");
+		audio_player.volume_db = 2.0;
+		audio_player.play();
 
 
 func _can_jump() -> bool:
@@ -102,7 +111,12 @@ var direction: int = 0;
 
 func _update_flags() -> void:
 	if is_on_floor():
-		flagState.Remove( Flags.Falling );
+		if flagState.Has( Flags.Falling ):
+			audio_player_2.stream = preload("uid://ckjinmw5gqd5f");
+			audio_player_2.pitch_scale = randf_range( 0.8, 1.0 );
+			audio_player_2.volume_db = -7.0;
+			audio_player_2.play();
+			flagState.Remove( Flags.Falling );
 
 		if velocity.x != 0 :
 			flagState.Add( Flags.Running );
@@ -170,6 +184,15 @@ func _on_animation_finished() -> void:
 			pass
 
 
+func _update_collisions() -> void:
+	var offset: float = 0.0;
+
+	if flagState.Has( Flags.Attacking ):
+		offset = ( -1 if animated_sprite_2d.flip_h else 1 ) * COLLISION_OFFSET_ATTACKING;
+
+	collision_shape_2d.position.x = offset;
+
+
 func _physics_process(delta: float) -> void:
 	_update_input( delta );
 	_update_coyote( delta );
@@ -178,6 +201,7 @@ func _physics_process(delta: float) -> void:
 	_update_flags();
 	_update_movement( delta );
 	_update_animations();
+	_update_collisions();
 	move_and_slide()
 
 	flagState.debug_print_update()
