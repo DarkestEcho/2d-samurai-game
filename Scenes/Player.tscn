@@ -323,9 +323,8 @@ animations = [{
 "speed": 22.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ixxa"]
-radius = 9.333334
-height = 35.333336
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kln2b"]
+size = Vector2(20, 35.000004)
 
 [node name="Player" type="CharacterBody2D" unique_id=832194066]
 scale = Vector2(3, 3)
@@ -334,13 +333,14 @@ script = ExtResource("1_5ixxa")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1704800305]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_yf17c")
-animation = &"Attacking"
+animation = &"Idle"
 autoplay = "Idle"
 offset = Vector2(0, -17.22)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1453111087]
-position = Vector2(0, -1.6666667)
-shape = SubResource("CapsuleShape2D_5ixxa")
+position = Vector2(0, -0.667)
+scale = Vector2(0.73333365, 0.9333333)
+shape = SubResource("RectangleShape2D_kln2b")
 
 [node name="FlagStateManager" type="Node" parent="." unique_id=971519293]
 script = ExtResource("6_nn08x")
