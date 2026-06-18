@@ -3,6 +3,12 @@ extends Node
 class_name FlagStateManager
 
 var _flags: int = StateFlags.Flags.None;
+var _prev_flags: int = _flags;
+
+func debug_print_update() -> void:
+	if _prev_flags != _flags:
+		_prev_flags = _flags;
+		print( "State Flags: ", GetActiveFlagNames() );
 
 func Add( mask: int ) -> void:
 	_flags |= mask;
