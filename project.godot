@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="2D Samurai Game"
-run/main_scene="uid://bcq1ukrpttlwv"
+run/main_scene="uid://dttv2jjlfscd0"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [input]
 

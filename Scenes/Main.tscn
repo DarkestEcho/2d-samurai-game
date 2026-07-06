@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://crdrnc3udwqfw" path="res://Scenes/Player.tscn" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://caolae2o057ys" path="res://icon.svg" id="2_idj7w"]
+[ext_resource type="AudioStream" uid="uid://bmdqg28jettkk" path="res://Assets/Sounds/Music/StableDream.wav" id="3_kln2b"]
+[ext_resource type="AudioStream" uid="uid://cxsrqga61em4m" path="res://Assets/Sounds/Ambient/Dungeon_ambience_–_W_#4-1766768400401.mp3" id="4_rgh2o"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_idj7w"]
 
@@ -61,3 +63,15 @@ texture = ExtResource("2_idj7w")
 position = Vector2(-3.0517578e-05, 0)
 scale = Vector2(0.9999998, 0.9999995)
 shape = SubResource("RectangleShape2D_idj7w")
+
+[node name="MusicAudio" type="AudioStreamPlayer" parent="." unique_id=363438482]
+stream = ExtResource("3_kln2b")
+volume_db = -15.0
+pitch_scale = 0.8
+autoplay = true
+
+[node name="AmbientAudio" type="AudioStreamPlayer" parent="." unique_id=1714705004]
+stream = ExtResource("4_rgh2o")
+volume_db = -10.0
+pitch_scale = 0.8
+autoplay = true
