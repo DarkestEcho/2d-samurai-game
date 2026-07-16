@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://d0fyths66yixj" path="res://Scripts/FlagStateManager.gd" id="6_nn08x"]
 [ext_resource type="AudioStream" uid="uid://wijpk6ttmh3y" path="res://Assets/Sounds/Characters/Player/Jump_001.wav" id="7_52ee3"]
 [ext_resource type="AudioStream" uid="uid://ckjinmw5gqd5f" path="res://Assets/Sounds/Characters/Player/Dirt Land.wav" id="8_bhhdu"]
+[ext_resource type="Material" uid="uid://b0c7d75p42o0o" path="res://Assets/Materials/RunParticlesMaterial.tres" id="9_megsn"]
+[ext_resource type="Material" uid="uid://c45kle8a5otjm" path="res://Assets/Materials/LandParticlesMaterial.tres" id="10_yoq75"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ksbbd"]
 atlas = ExtResource("1_dewec")
@@ -302,12 +304,29 @@ size = Vector2(20, 35.000004)
 scale = Vector2(3, 3)
 script = ExtResource("1_5ixxa")
 
+[node name="RunParticles" type="GPUParticles2D" parent="." unique_id=1164318975]
+position = Vector2(2, 12)
+emitting = false
+amount = 4
+lifetime = 0.3
+process_material = ExtResource("9_megsn")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1704800305]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_yf17c")
 animation = &"Idle"
 autoplay = "Idle"
 offset = Vector2(0, -17.22)
+
+[node name="LandParticles" type="GPUParticles2D" parent="." unique_id=1804816323]
+position = Vector2(0, 17.333334)
+emitting = false
+amount = 4
+lifetime = 0.5
+one_shot = true
+speed_scale = 1.3
+explosiveness = 1.0
+process_material = ExtResource("10_yoq75")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1453111087]
 position = Vector2(0, -0.667)

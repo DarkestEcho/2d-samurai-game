@@ -7,6 +7,8 @@ extends CharacterBody2D
 @onready var land_audio: AudioStreamPlayer2D = $LandAudio
 @onready var attack_audio: AudioStreamPlayer2D = $AttackAudio
 @onready var footstep_audio: AudioStreamPlayer2D = $FootstepAudio
+@onready var run_particles: GPUParticles2D = $RunParticles
+@onready var land_particles: GPUParticles2D = $LandParticles
 
 const Flags = StateFlags.Flags;
 const FlagsPriority = StateFlags.FlagsPriority;
@@ -15,7 +17,7 @@ const SPEED = 800.0
 const SPEED_MOD = 30
 const JUMP_VELOCITY = -750.0
 const GRAVITY_MOD = 2
-const COYOTE_TIME = 0.12 # in seconds
+const COYOTE_TIME = 0.1 # in seconds
 const ATTACK_BUFFER_TIME = 0.25 # in seconds
 const JUMP_BUFFER_TIME = 0.15 # in seconds
 const ATTACK_COOLDOWN_TIME = 0.25 # in seconds
@@ -71,6 +73,26 @@ func _update_coyote( delta: float ) -> void:
 		was_on_floor = true;
 	elif coyote_timer > 0.0:
 		coyote_timer -= delta;
+
+
+func _update_particles() -> void:
+	var should_emit: bool = flagState.Has( StateFlags.Flags.Running ) and flagState.HasNone( StateFlags.IN_AIR );
+	
+	if run_particles.emitting != should_emit:
+		run_particles.emitting = should_emit;
+
+	run_particles.position.x = -sign(velocity.x) * 5.0;
+
+
+var _was_on_floor: bool = false;
+
+func _handle_landing() -> void:
+	var on_floor = is_on_floor();
+	
+	if on_floor and not _was_on_floor:
+		land_particles.restart();
+	
+	_was_on_floor = on_floor;
 
 
 func _handle_attack() -> void:
@@ -239,7 +261,6 @@ func _physics_process(delta: float) -> void:
 	
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta;
-	
 
 	_update_input( delta );
 	_update_coyote( delta );
@@ -250,6 +271,8 @@ func _physics_process(delta: float) -> void:
 	_update_movement( delta );
 	_update_animations();
 	_update_collisions();
+	_update_particles();
+	_handle_landing();
 	move_and_slide()
 
 	flagState.debug_print_update()
